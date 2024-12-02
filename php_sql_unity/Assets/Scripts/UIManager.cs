@@ -27,12 +27,12 @@ public class UIManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        /*
+        
         loginTab.SetActive(true);
         signUpTab.SetActive(false);
         lobbyTab.SetActive(false);
         msgTab.SetActive(false);
-        */
+        
     }
 
     // Update is called once per frame
@@ -91,5 +91,16 @@ public class UIManager : MonoBehaviour
     {
         closeTab(fromTab);
         OpenTab(toTab);
+    }
+
+    public void EnterLobby(int id)
+    {
+        ChangeTab(TAB.LOGIN, TAB.LOBBY);
+        lobbyTab.GetComponent<Lobby>().EnterLobby(id);
+    }
+
+    public void WorkingInProgressPopUp()
+    {
+        OpenMSGBox("Working in progress...");
     }
 }

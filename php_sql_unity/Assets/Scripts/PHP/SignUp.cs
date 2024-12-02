@@ -89,6 +89,9 @@ public class SignUp : MonoBehaviour
                 Debug.Log("Response: " + webRequest.downloadHandler.text);
                 if (UIManager.instance != null)
                 {
+                    usernameField.text = string.Empty;
+                    passwordField.text = string.Empty;
+                    confirmField.text = string.Empty;
                     UIManager.instance.OpenMSGBox("Register conpleted!!!");
                     UIManager.instance.ChangeTab(TAB.SIGNUP, TAB.LOGIN);
                 }

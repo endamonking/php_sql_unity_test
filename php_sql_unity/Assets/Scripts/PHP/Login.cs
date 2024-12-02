@@ -6,6 +6,13 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
+public class LoginJson
+{
+    public string status;
+    public int id;
+}
+
 public class Login : MonoBehaviour
 {
     [SerializeField]
@@ -69,16 +76,21 @@ public class Login : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Response: " + webRequest.downloadHandler.text);
+
                 if (UIManager.instance != null)
                 {
+
                     if (webRequest.downloadHandler.text == "[\"Invalid username or password\"]")
                     {
                         UIManager.instance.OpenMSGBox("Invalid username or password");
                     }
-                    else if (webRequest.downloadHandler.text == "[\"Login successfully!\"]")
+                    else
                     {
-                        UIManager.instance.OpenMSGBox("Login successful");
-                        UIManager.instance.ChangeTab(TAB.LOGIN, TAB.LOBBY);
+
+                        LoginJson receiveJson = JsonUtility.FromJson<LoginJson>(webRequest.downloadHandler.text);
+                        //UIManager.instance.OpenMSGBox("Login successful");
+                        UIManager.instance.EnterLobby(receiveJson.id);
+          
                     }
 
                     usernameField.text = string.Empty;
