@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
 using System.Text;
-using Unity.VisualScripting;
-
 
 public class UserItem
 {
